@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>スーファミ所持リスト</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        form { margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <h1>スーファミ所持リスト</h1>
+
+    <form method="get" action="/">
+        <label>タイトル検索：</label>
+        <input type="text" name="q" value="{{ query }}">
+        <button type="submit">検索</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>タイトル</th>
+            <th>メーカー</th>
+            <th>発売日</th>
+            <th>ジャンル</th>
+            <th>価格</th>
+            <th>備考</th>
+            <th>所持</th>
+        </tr>
+        {% for idx, game in games %}
+        <tr>
+            <td>{{ game['タイトル'] }}</td>
+            <td>{{ game['メーカー'] }}</td>
+            <td>{{ game['発売日'] }}</td>
+            <td>{{ game['ジャンル'] }}</td>
+            <td>{{ game['価格'] }}</td>
+            <td>{{ game['備考'] }}</td>
+            <td>
+                <a href="{{ url_for('toggle') }}?index={{ idx }}">{{ game['所持'] }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
